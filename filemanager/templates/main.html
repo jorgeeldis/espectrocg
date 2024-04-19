@@ -11,8 +11,8 @@
 
       <!-- /.col-->
       <div class="col-md-12">
-      <div class="card mb-2">
-        <div class="card-header">Archivos</div>
+      <div class="card mb-2 m-2">
+        <div class="card-header">Recent files</div>
         <div class="card-body">
           <!-- <div class="d-flex align-items-center justify-content-between">
             <div>
@@ -22,19 +22,17 @@
           <hr> -->
 
           {% for file in files %}
-          <div class="d-flex align-items-center justify-content-between mb-2">
-            <div class="d-flex align-items-center">
-              <h6 class="card-subtitle mb-0 mr-2">{{ file.name }}</h6>
-              <span class="text-muted">&nbsp;- {{file.date}}</span>
+          <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-2">
+            <div class="d-flex flex-column flex-md-row align-items-center">
+              <h6 class="card-subtitle mb-1 mt-1">{{ file.name }}</h6>
+              <h6 class="card-subtitle mb-1 mt-1">&nbsp;- {{file.date}}</h6>
             </div>
-            <div class="btn-toolbar d-none d-md-block mr-3" role="toolbar" aria-label="Toolbar with buttons">
-
-
-              <button class="btn btn-primary" onclick="window.open('media/pdf/{{file.name}}','_blank')"> <svg class="icon">
+            <div class="btn-toolbar mt-2 mt-md-0 mr-md-3" role="toolbar" aria-label="Toolbar with buttons">
+              <button class="btn btn-primary m-1" onclick="window.open('media/pdf/{{file.name}}','_blank')"> 
+                <svg class="icon">
                   <use xlink:href="{% static 'icons/svg/free.svg' %}#cil-cloud-download"></use>
                 </svg>
               </button>
-
             </div>
           </div>
           {% endfor %}
