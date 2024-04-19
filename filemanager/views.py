@@ -18,7 +18,6 @@ def index(request):
         normal_date=datetime.fromtimestamp(os.path.getctime(path + "/pdf/" + file)).strftime('%Y-%m-%d %H:%M:%S')
         file = {"name": file, "size": os.path.getsize(path + "/pdf/" + file), "date": normal_date}
         list_of_files.append(file)
-
     return render(request, "main.html", { "files": list_of_files})
 
 
