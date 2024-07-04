@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="body flex-grow-1">
+    <div class="container-lg px-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card mb-2 m-2">
+                    <div class="card-header">Recent data (CSV)</div>
+                    <div class="card-body">
+                        {% if csv_data %}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    {% for header in headers %}
+                                    <th>{{ header }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in csv_data %}
+                                <tr>
+                                    {% for value in row.values %}
+                                    <td>{{ value }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+
+                        <!-- Existing content display for listing files -->
+                        {% for file in files %}
+                            {% if file.type|lower == 'csv' %}
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="text-center" style="border: 1px solid #9fa4a8; padding: 20px; border-radius: 5px;">
+                                    <h6 class="card-subtitle mb-1">{{ file.name }}</h6>
+                                    <h6 class="card-subtitle mb-2">{{ file.date }}</h6>
+                                    <button type="button" class="btn btn-primary mb-2" onclick="window.open('media/csv/{{file.name}}','_blank')">View Details</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

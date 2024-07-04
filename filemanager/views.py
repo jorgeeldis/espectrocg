@@ -4,6 +4,7 @@ from .forms import DocumentForm
 from .models import Document
 from django.conf import settings
 from datetime import datetime
+import csv
 
 # Create your views here.
 def index(request):
@@ -55,17 +56,59 @@ def graphs(request):
     return render(request, "graphs.html", {"files": list_of_files})
 
 def data(request):
-    return render(request, "data.html")
+    base_path = settings.MEDIA_ROOT
+    folders = ["csv"]
+    list_of_files = []
+
+    for folder in folders:
+        path = os.path.join(base_path, folder)
+        dir_list = os.listdir(path)
+
+        for file_name in dir_list:
+            file_path = os.path.join(path, file_name)
+            normal_date = datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
+            file_info = {
+                "name": file_name,
+                "size": os.path.getsize(file_path),
+                "date": normal_date,
+                "type": folder.upper()
+            }
+            list_of_files.append(file_info)
+
+    return render(request, "data.html", {"files": list_of_files})
 
 def logs(request):
     return render(request, "logs.html")
 
 def user(request):
     return render(request, "user.html")
+
+def files(request):
+    base_path = settings.MEDIA_ROOT
+    folders = ["pdf"]
+    list_of_files = []
+
+    for folder in folders:
+        path = os.path.join(base_path, folder)
+        dir_list = os.listdir(path)
+
+        for file_name in dir_list:
+            file_path = os.path.join(path, file_name)
+            normal_date = datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
+            file_info = {
+                "name": file_name,
+                "size": os.path.getsize(file_path),
+                "date": normal_date,
+                "type": folder.upper()
+            }
+            list_of_files.append(file_info)
+
+    return render(request, "files.html", {"files": list_of_files})
+
  
 # En tu archivo views.py
 # @csrf_exempt
-def subir_documento(request):
+def upload(request):
     if request.method == "POST":
         print(request.FILES)
         form = DocumentForm(request.POST, request.FILES)
@@ -76,4 +119,4 @@ def subir_documento(request):
             return redirect("index")
     else:
         form = DocumentForm()
-    return render(request, "upload_document.html", {"form": form})
+    return render(request, "upload.html", {"form": form})

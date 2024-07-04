@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="body flex-grow-1">
+    <div class="container-lg px-4">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card mb-2 m-2">
+                    <div class="card-header">Recent files (PDF)</div>
+                    <div class="card-body">
+                        {% for file in files %}
+                            {% if file.type|lower == 'pdf' %}
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="text-center" style="border: 1px solid #9fa4a8; padding: 20px; border-radius: 5px;">
+                                    <h6 class="card-subtitle mb-1">{{ file.name }}</h6>
+                                    <h6 class="card-subtitle mb-2">{{ file.date }}</h6>
+                                    <button type="button" class="btn btn-primary mb-2" onclick="window.open('media/pdf/{{file.name}}','_blank')">View Details</button>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
