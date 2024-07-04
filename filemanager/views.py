@@ -7,18 +7,26 @@ from datetime import datetime
 
 # Create your views here.
 def index(request):
-    # Get the list of all files and directories
-    path = settings.MEDIA_ROOT
-    dir_list = os.listdir(path + "/pdf")
-
-    file = {"name": "", "size": "", "date": ""}
+    base_path = settings.MEDIA_ROOT
+    folders = ["pdf", "csv", "png"]
     list_of_files = []
 
-    for file in dir_list:
-        normal_date=datetime.fromtimestamp(os.path.getctime(path + "/pdf/" + file)).strftime('%Y-%m-%d %H:%M:%S')
-        file = {"name": file, "size": os.path.getsize(path + "/pdf/" + file), "date": normal_date}
-        list_of_files.append(file)
-    return render(request, "main.html", { "files": list_of_files})
+    for folder in folders:
+        path = os.path.join(base_path, folder)
+        dir_list = os.listdir(path)
+
+        for file_name in dir_list:
+            file_path = os.path.join(path, file_name)
+            normal_date = datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
+            file_info = {
+                "name": file_name,
+                "size": os.path.getsize(file_path),
+                "date": normal_date,
+                "type": folder.upper()
+            }
+            list_of_files.append(file_info)
+
+    return render(request, "main.html", {"files": list_of_files})
 
 
 def about(request):
