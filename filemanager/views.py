@@ -32,7 +32,37 @@ def index(request):
 def about(request):
     return render(request, "about.html", {"name": "John Doe"})
 
+def graphs(request):
+    base_path = settings.MEDIA_ROOT
+    folders = ["png"]
+    list_of_files = []
 
+    for folder in folders:
+        path = os.path.join(base_path, folder)
+        dir_list = os.listdir(path)
+
+        for file_name in dir_list:
+            file_path = os.path.join(path, file_name)
+            normal_date = datetime.fromtimestamp(os.path.getctime(file_path)).strftime('%Y-%m-%d %H:%M:%S')
+            file_info = {
+                "name": file_name,
+                "size": os.path.getsize(file_path),
+                "date": normal_date,
+                "type": folder.upper()
+            }
+            list_of_files.append(file_info)
+
+    return render(request, "graphs.html", {"files": list_of_files})
+
+def data(request):
+    return render(request, "data.html")
+
+def logs(request):
+    return render(request, "logs.html")
+
+def user(request):
+    return render(request, "user.html")
+ 
 # En tu archivo views.py
 # @csrf_exempt
 def subir_documento(request):
