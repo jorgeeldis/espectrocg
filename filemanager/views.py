@@ -77,9 +77,6 @@ def data(request):
 
     return render(request, "data.html", {"files": list_of_files})
 
-def logs(request):
-    return render(request, "logs.html")
-
 def user(request):
     return render(request, "user.html")
 
