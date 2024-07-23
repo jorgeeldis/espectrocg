@@ -114,6 +114,6 @@ def upload(request):
         if form.is_valid():
             form.save()
             return redirect("index")
-    else:
+    else: 
         form = DocumentForm()
     return render(request, "upload.html", {"form": form})
