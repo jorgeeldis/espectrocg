@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-def custom_upload_to(filename, file):
+def custom_upload_to(filename):
     # Get the file extension (e.g., 'png', 'pdf', 'csv')
     extension = filename.split('.')[-1].lower()
     # Map the extension to the correct folder
