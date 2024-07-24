@@ -11,6 +11,44 @@
       <!-- /.col-->
       <div class="col-md-12">
 
+        <!-- Initialize counters -->
+        
+        <!-- Row for the three cards -->
+        <div class="row mb-3 mt-3">
+          <div class="col-md-4">
+            <div class="card mb-2 m-2 border-danger">
+              <div class="card-header bg-danger text-white">Number of PDF Files</div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-1 mt-1">
+                  {{ pdf_count }}
+                </h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card mb-2 m-2 border-success">
+              <div class="card-header bg-success text-white">Number of PNG Files</div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-1 mt-1">
+                  {{ png_count }}
+                </h6>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card mb-2 m-2 border-primary">
+              <div class="card-header bg-primary text-white">Number of CSV Files</div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-1 mt-1">
+                  {{ csv_count }}
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="card mb-2 m-2">
           <div class="card-header">Recent graphs (PNG)</div>
           <div class="card-body">
@@ -19,10 +57,10 @@
             <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-2">
               <div class="d-flex flex-column flex-md-row align-items-center">
                 <h6 class="card-subtitle mb-1 mt-1">{{ file.name }}</h6>
-                <h6 class="card-subtitle mb-1 mt-1">&nbsp;- {{file.date}}</h6>
+                <h6 class="card-subtitle mb-1 mt-1">&nbsp;- {{ file.date }}</h6>
               </div>
               <div class="btn-toolbar mt-2 mt-md-0 mr-md-3" role="toolbar" aria-label="Toolbar with buttons">
-                <button class="btn btn-primary m-1" onclick="window.open('media/png/{{file.name}}','_blank')">
+                <button class="btn btn-primary m-1" onclick="window.open('media/{{ file.type|lower }}/{{ file.name }}','_blank')">
                   <svg class="icon">
                     <use xlink:href="{% static 'icons/svg/free.svg' %}#cil-cloud-download"></use>
                   </svg>

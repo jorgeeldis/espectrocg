@@ -11,6 +11,9 @@ def index(request):
     base_path = settings.MEDIA_ROOT
     folders = ["pdf", "csv", "png"]
     list_of_files = []
+    pdf_count = 0
+    png_count = 0
+    csv_count = 0
 
     for folder in folders:
         path = os.path.join(base_path, folder)
@@ -26,8 +29,14 @@ def index(request):
                 "type": folder.upper()
             }
             list_of_files.append(file_info)
+            if folder == "pdf":
+                pdf_count += 1
+            elif folder == "png":
+                png_count += 1
+            elif folder == "csv":
+                csv_count += 1
 
-    return render(request, "main.html", {"files": list_of_files})
+    return render(request, "main.html", {"files": list_of_files, "pdf_count": pdf_count, "png_count": png_count, "csv_count": csv_count})
 
 
 def about(request):
