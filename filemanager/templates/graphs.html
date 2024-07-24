@@ -11,21 +11,23 @@
         <div class="card mb-2 m-2">
           <div class="card-header">Recent graphs (PNG)</div>
           <div class="card-body">
-            {% for file in files %}
-              {% if file.type|lower == 'png' %}
-              <div class="d-flex justify-content-center mb-4"> <!-- Add margin for spacing between blocks -->
-                <div class="text-center" style="border: 1px solid #9fa4a8; padding: 20px; border-radius: 5px;"> <!-- Border, padding, and rounded corners for visual separation -->
-                  <h6 class="card-subtitle mb-1">{{ file.name }}</h6>
-                  <h6 class="card-subtitle mb-2">{{ file.date }}</h6>
-                  <div class="image-container mb-2">
-                    <img src="media/png/{{file.name}}" alt="{{file.name}}" style="max-width: 100%; height: auto;">
+            <div class="row">
+              {% for file in files %}
+                {% if file.type|lower == 'png' %}
+                <div class="col-md-4 mb-4 d-flex justify-content-center"> <!-- 4 columns per row for a 3x3 grid -->
+                  <div class="text-center" style="border: 1px solid #9fa4a8; padding: 20px; border-radius: 5px;"> <!-- Border, padding, and rounded corners for visual separation -->
+                    <h6 class="card-subtitle mb-1">{{ file.name }}</h6>
+                    <h6 class="card-subtitle mb-2">{{ file.date }}</h6>
+                    <div class="image-container mb-2">
+                      <img src="media/png/{{file.name}}" alt="{{file.name}}" style="max-width: 100%; height: auto;">
+                    </div>
+                    <!-- Button below the image -->
+                    <button type="button" class="btn btn-primary mb-2" onclick="window.open('media/png/{{file.name}}','_blank')">View Details</button>
                   </div>
-                  <!-- Button below the image -->
-                  <button type="button" class="btn btn-primary mb-2" onclick="window.open('media/png/{{file.name}}','_blank')">View Details</button>
                 </div>
-              </div>
-              {% endif %}
-            {% endfor %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
