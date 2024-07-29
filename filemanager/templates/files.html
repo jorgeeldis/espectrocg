@@ -11,17 +11,20 @@
                 <div class="card mb-2 m-2">
                     <div class="card-header">Recent files (PDF)</div>
                     <div class="card-body">
-                        {% for file in files %}
-                            {% if file.type|lower == 'pdf' %}
-                            <div class="d-flex justify-content-center mb-4">
-                                <div class="text-center" style="border: 1px solid #9fa4a8; padding: 20px; border-radius: 5px;">
-                                    <h6 class="card-subtitle mb-1">{{ file.name }}</h6>
-                                    <h6 class="card-subtitle mb-2">{{ file.date }}</h6>
-                                    <button type="button" class="btn btn-primary mb-2" onclick="window.open('media/pdf/{{file.name}}','_blank')">View Details</button>
+                        <div class="row">
+                            {% for file in files %}
+                                {% if file.type|lower == 'pdf' %}
+                                <div class="col-md-4 mb-4 d-flex justify-content-center"> <!-- 4 columns per row for a 3x3 grid -->
+                                    <div class="text-center" style="border: 1px solid #9fa4a8; padding: 20px; border-radius: 5px;"> <!-- Border, padding, and rounded corners for visual separation -->
+                                        <h6 class="card-subtitle mb-1">{{ file.name }}</h6>
+                                        <h6 class="card-subtitle mb-2">{{ file.date }}</h6>
+                                        <!-- Button below the details -->
+                                        <button type="button" class="btn btn-primary mb-2" onclick="window.open('media/pdf/{{file.name}}','_blank')">View Details</button>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endif %}
-                        {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
