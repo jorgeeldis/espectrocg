@@ -35,7 +35,8 @@ def index(request):
                 png_count += 1
             elif folder == "csv":
                 csv_count += 1
-
+                
+    list_of_files.sort(key=lambda x: x["name"])
     return render(request, "main.html", {"files": list_of_files, "pdf_count": pdf_count, "png_count": png_count, "csv_count": csv_count})
 
 
