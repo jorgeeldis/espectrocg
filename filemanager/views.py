@@ -62,6 +62,7 @@ def graphs(request):
             }
             list_of_files.append(file_info)
 
+    list_of_files.sort(key=lambda x: x["name"])
     return render(request, "graphs.html", {"files": list_of_files})
 
 def data(request):
@@ -84,6 +85,7 @@ def data(request):
             }
             list_of_files.append(file_info)
 
+    list_of_files.sort(key=lambda x: x["name"])
     return render(request, "data.html", {"files": list_of_files})
 
 def user(request):
@@ -109,6 +111,7 @@ def files(request):
             }
             list_of_files.append(file_info)
 
+    list_of_files.sort(key=lambda x: x["name"])
     return render(request, "files.html", {"files": list_of_files})
 
  
